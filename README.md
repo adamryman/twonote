@@ -1,3 +1,7 @@
+##Currently not working
+
+Something is wrong when I install the plugin, I have been working on this for a few hours but I need to sleep, hopefully v0.1 will be done soon.
+
 #twonote
 
 Version controlled markdown notes plugin for vim.
