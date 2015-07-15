@@ -3,14 +3,14 @@ map <leader><leader>j :TwoNote<enter>
 map <leader><leader>k :call TwoNoteInit()<enter>
 
 "Start plugin
-autocmd BufReadPost $HOME/.vim/bundle/twonote/* :TwoNoteHook
+autocmd BufReadPost $HOME/.vim/bundle/twonote/notes/* :TwoNoteHook
 
 command! TwoNote call TwoNote()
 command! TwoNoteHook call TwoNoteHook()
 
 
 function! TwoNote()
-		let _twonote_path="$HOME/.vim/bundle/twonote/"
+		let _twonote_path="$HOME/.vim/bundle/twonote/notes"
 
 		let _twonote_datepath=strftime("%Y/%m/%d/")
 		let _twonote_RFC3339=strftime("%FT%T%z")
@@ -36,14 +36,14 @@ function! TwoNoteInit()
 		"execute ":call TwoNoteUtil()"
 		"call TwoNoteUtil()
 		"So I just set it directly
-		let _twonote_path="~/.vim/bundle/twonote/"
+		let _twonote_path="~/.vim/bundle/twonote/notes/"
 
 		execute ":silent !cd " . _twonote_path . ";git init"
 		execute ":redraw!"
 endfunction
 
 function! TwoNoteUtil()
-		let _twonote_path="~/.vim/bundle/twonote/"
+		let _twonote_path="~/.vim/bundle/twonote/notes/"
 endfunction
 
 function! TwoNoteHook()
