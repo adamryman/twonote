@@ -3,7 +3,11 @@ map <leader><leader>j :TwoNote<enter>
 map <leader><leader>k :call TwoNoteInit()<enter>
 
 "Start plugin
+autocmd BufReadPost $HOME/.vim/bundle/twonote/* :TwoNoteHook
+
 command! TwoNote call TwoNote()
+command! TwoNoteHook call TwoNoteHook()
+
 
 function! TwoNote()
 		let _twonote_path="$HOME/.vim/bundle/twonote/"
@@ -40,4 +44,15 @@ endfunction
 
 function! TwoNoteUtil()
 		let _twonote_path="~/.vim/bundle/twonote/"
+endfunction
+
+function! TwoNoteHook()
+		let _twonote_notepath=expand('%:p')
+		echo _twonote_notepath
+		let _twonote_RFC3339_md=expand('%:t')
+		echo _twonote_RFC3339_md
+		let _twonote_gitadd = "git add " . _twonote_notepath . ";"
+		let autoWriteCMD="silent ! " . _twonote_gitadd . "git commit -m 'Updating " . _twonote_RFC3339_md . " at " . strftime("%s") . "'"
+		execute ":autocmd BufWritePost " . _twonote_notepath . " :execute \"" . autoWriteCMD . "\""
+		execute ":autocmd BufWritePost " . _twonote_notepath . " :execute 'redraw!'"
 endfunction
