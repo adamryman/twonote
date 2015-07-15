@@ -8,9 +8,8 @@ autocmd BufReadPost $HOME/.vim/bundle/twonote/notes/* :TwoNoteHook
 command! TwoNote call TwoNote()
 command! TwoNoteHook call TwoNoteHook()
 
-
 function! TwoNote()
-		let _twonote_path="$HOME/.vim/bundle/twonote/notes"
+		let _twonote_path="$HOME/.vim/bundle/twonote/notes/"
 
 		let _twonote_datepath=strftime("%Y/%m/%d/")
 		let _twonote_RFC3339=strftime("%FT%T%z")
@@ -26,9 +25,9 @@ function! TwoNote()
 	    execute ":redraw!"
 		execute ":e " . _twonote_notepath
 		let autoWriteCMD="silent ! " . _twonote_gitadd . "git commit -m 'Updating " . _twonote_RFC3339 . ".md at " . strftime("%s") . "'"
-		echo ":autocmd BufWritePost " . _twonote_notepath . " :execute \"" . autoWriteCMD . "\""
-		execute ":autocmd BufWritePost " . _twonote_notepath . " :execute \"" . autoWriteCMD . "\""
-		execute ":autocmd BufWritePost " . _twonote_notepath . " :execute 'redraw!'"
+		"echo ":autocmd BufWritePost " . _twonote_notepath . " :execute \"" . autoWriteCMD . "\""
+		"execute ":autocmd BufWritePost " . _twonote_notepath . " :execute \"" . autoWriteCMD . "\""
+		"execute ":autocmd BufWritePost " . _twonote_notepath . " :execute 'redraw!'"
 endfunction
 
 function! TwoNoteInit()
