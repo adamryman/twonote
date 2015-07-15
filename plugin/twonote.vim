@@ -36,7 +36,8 @@ function! TwoNoteInit()
 		"call TwoNoteUtil()
 		"So I just set it directly
 		let _twonote_path="~/.vim/bundle/twonote/notes/"
-
+		execute ":silent !mkdir -p " . _twonote_path
+		execute ":redraw!"
 		execute ":silent !cd " . _twonote_path . ";git init"
 		execute ":redraw!"
 endfunction
