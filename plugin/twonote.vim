@@ -21,8 +21,10 @@ function! TwoNote()
 		execute ":silent !cd " . _twonote_path . ";" . _twonote_gitadd . "git commit -m \"" . _twonote_RFC3339 . ".md created at " . strftime("%s") . "\""
 	    execute ":redraw!"
 		execute ":e " . _twonote_notepath
-		echo ":autocmd BufWritePost " . _twonote_notepath . " :echo 'lol'"
-		execute ":autocmd BufWritePost " . _twonote_notepath . " :echo 'lol'"
+		let autoWriteCMD="silent ! " . _twonote_gitadd . "git commit -m 'Updating " . _twonote_RFC3339 . ".md at " . strftime("%s") . "'"
+		echo ":autocmd BufWritePost " . _twonote_notepath . " :execute \"" . autoWriteCMD . "\""
+		execute ":autocmd BufWritePost " . _twonote_notepath . " :execute \"" . autoWriteCMD . "\""
+		execute ":autocmd BufWritePost " . _twonote_notepath . " :execute 'redraw!'"
 endfunction
 
 function! TwoNoteInit()
