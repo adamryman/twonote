@@ -7,6 +7,7 @@ autocmd BufReadPost $HOME/.vim/bundle/twonote/notes/* :TwoNoteHook
 
 command! TwoNote call TwoNote()
 command! TwoNoteHook call TwoNoteHook()
+command! TwoNoteInit call TwoNoteInit()
 
 function! TwoNote()
 		let _twonote_path="$HOME/.vim/bundle/twonote/notes/"
@@ -24,10 +25,6 @@ function! TwoNote()
 		execute ":silent !cd " . _twonote_path . ";" . _twonote_gitadd . "git commit -m \"" . _twonote_RFC3339 . ".md created at " . strftime("%s") . "\""
 	    execute ":redraw!"
 		execute ":e " . _twonote_notepath
-		let autoWriteCMD="silent ! " . _twonote_gitadd . "git commit -m 'Updating " . _twonote_RFC3339 . ".md at " . strftime("%s") . "'"
-		"echo ":autocmd BufWritePost " . _twonote_notepath . " :execute \"" . autoWriteCMD . "\""
-		"execute ":autocmd BufWritePost " . _twonote_notepath . " :execute \"" . autoWriteCMD . "\""
-		"execute ":autocmd BufWritePost " . _twonote_notepath . " :execute 'redraw!'"
 endfunction
 
 function! TwoNoteInit()
@@ -36,8 +33,8 @@ function! TwoNoteInit()
 		"call TwoNoteUtil()
 		"So I just set it directly
 		let _twonote_path="~/.vim/bundle/twonote/notes/"
+
 		execute ":silent !mkdir -p " . _twonote_path
-		execute ":redraw!"
 		execute ":silent !cd " . _twonote_path . ";git init"
 		execute ":redraw!"
 endfunction
@@ -48,11 +45,9 @@ endfunction
 
 function! TwoNoteHook()
 		let _twonote_notepath=expand('%:p')
-		echo _twonote_notepath
 		let _twonote_RFC3339_md=expand('%:t')
-		echo _twonote_RFC3339_md
 		let _twonote_gitadd = "git add " . _twonote_notepath . ";"
-		let autoWriteCMD="silent ! " . _twonote_gitadd . "git commit -m 'Updating " . _twonote_RFC3339_md . " at " . strftime("%s") . "'"
+		let autoWriteCMD="silent ! " . _twonote_gitadd . "git commit -m 'Updating " . _twonote_RFC3339_md . " at strftime('shellescape(%)s')'"
 		execute ":autocmd BufWritePost " . _twonote_notepath . " :execute \"" . autoWriteCMD . "\""
 		execute ":autocmd BufWritePost " . _twonote_notepath . " :execute 'redraw!'"
 endfunction
