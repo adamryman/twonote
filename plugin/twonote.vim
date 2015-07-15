@@ -6,7 +6,7 @@ map <leader><leader>k :call TwoNoteInit()<enter>
 command! TwoNote call TwoNote()
 
 function! TwoNote()
-		let _twonote_path="~/.vim/bundle/twonote/"
+		let _twonote_path="$HOME/.vim/bundle/twonote/"
 
 		let _twonote_datepath=strftime("%Y/%m/%d/")
 		let _twonote_RFC3339=strftime("%FT%T%z")
@@ -15,8 +15,14 @@ function! TwoNote()
 		execute ":redraw!"
 		execute ":silent !touch " . _twonote_notepath
 		execute ":redraw!"
-		execute ":silent !cd " . _twonote_path . ";git add " . _twonote_notepath . ";git commit -m \"" . _twonote_RFC3339 . ".md created at " . strftime("%s") . "\""
+
+
+		let _twonote_gitadd = "git add " . _twonote_notepath . ";"
+		execute ":silent !cd " . _twonote_path . ";" . _twonote_gitadd . "git commit -m \"" . _twonote_RFC3339 . ".md created at " . strftime("%s") . "\""
 	    execute ":redraw!"
+		execute ":e " . _twonote_notepath
+		echo ":autocmd BufWritePost " . _twonote_notepath . " :echo 'lol'"
+		execute ":autocmd BufWritePost " . _twonote_notepath . " :echo 'lol'"
 endfunction
 
 function! TwoNoteInit()
