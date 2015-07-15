@@ -35,6 +35,7 @@ Used to start writing a new note
 Open file in $HOME/.vim/bundle/twonote/notes and when saved it all be added and commited
 
 ###TODO
+- IMPORTANT: Not allow user to call `:TwoNote` before `:TwoNoteInstall`
 - Create an autocmd to auto write the file every 10 seconds, this will be configurable
 - Create a way to push the note repo from twonote
 - Create a way to pull notes from repo from twonote
