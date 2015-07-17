@@ -40,6 +40,8 @@ Open file in $HOME/.vim/bundle/twonote/notes and when saved it all be added and 
 
 ###TODO
 - IMPORTANT: Not allow user to call `:TwoNote` before `:TwoNoteInstall`
+- Delete notes that are empty
+	- Also if a user creates a note and closes without writing it, that should not be in history
 - Create an autocmd to auto write the file every 10 seconds, this will be configurable
 - Create a way to push the note repo from twonote
 - Create a way to pull notes from repo from twonote
