@@ -9,7 +9,7 @@ source $HOME/.vim/bundle/twonote-vim/plugin/config.vim
 augroup _twonote_init
 autocmd!
 execute "autocmd BufReadPost " . g:_twonote_path . "* :TwoNoteHook"
-execute "autocmd BufReadPost " . g:_twonote_path . "* call TwoNotePre()"
+execute "autocmd BufReadPre " . g:_twonote_path . "* call TwoNotePre()"
 "execute "autocmd BufDelete " . g:_twonote_path . "* call TwoNotePost()"
 "execute "autocmd BufUnload " . g:_twonote_path . "* call TwoNotePost()"
 "autocmd BufReadPre  g:_twonote_path . '*' call TwoNotePre()
@@ -61,6 +61,7 @@ function! TwoNoteHook()
 		echom "DEBUGL TwoNoteHook()"
 		let _twonote_note_path=expand('%:p')
 		let _twonote_RFC3339_md=expand('%:t')
+		lcd %:p:h
 		let _twonote_gitadd = "git add " . _twonote_note_path . ";"
 		let autoWriteCMD="! " . _twonote_gitadd . "git commit -m 'Updating " . _twonote_RFC3339_md . "'"
 		execute ":autocmd BufWritePost " . _twonote_note_path . " :execute \"" . autoWriteCMD . "\""
