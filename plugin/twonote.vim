@@ -10,8 +10,8 @@ augroup _twonote_init
 autocmd!
 execute "autocmd BufReadPost " . g:_twonote_path . "* :TwoNoteHook"
 execute "autocmd BufReadPost " . g:_twonote_path . "* call TwoNotePre()"
-execute "autocmd BufDelete " . g:_twonote_path . "* call TwoNotePost()"
-execute "autocmd BufUnload " . g:_twonote_path . "* call TwoNotePost()"
+"execute "autocmd BufDelete " . g:_twonote_path . "* call TwoNotePost()"
+"execute "autocmd BufUnload " . g:_twonote_path . "* call TwoNotePost()"
 "autocmd BufReadPre  g:_twonote_path . '*' call TwoNotePre()
 "autocmd BufWritePost g:_twonote_path . '*' call TwoNotePost()
 augroup END
@@ -33,10 +33,8 @@ function! TwoNote()
 		execute ":redraw!"
 
 
-		let _twonote_gitadd = "git add " . _twonote_notepath . ";"
-		execute ":silent !cd " . g:_twonote_path
-	   	execute	":silent ! " . _twonote_gitadd
-	   	execute	":silent ! git commit -m \"" . _twonote_RFC3339 . ".md created at " . strftime("%s") . "\""
+		let _twonote_gitadd = "git add " . _twonote_note_path . ";"
+		execute ":silent !cd " . g:_twonote_path . ";" . _twonote_gitadd . "git commit -m \"" . _twonote_RFC3339 . ".md created at " . strftime("%s") . "\""
 	    execute ":redraw!"
 		execute ":e " . _twonote_note_path
 endfunction
@@ -60,25 +58,26 @@ endfunction
 
 function! TwoNoteHook()
 		"call TwoNoteUtil()
+		echom "DEBUGL TwoNoteHook()"
 		let _twonote_note_path=expand('%:p')
 		let _twonote_RFC3339_md=expand('%:t')
 		let _twonote_gitadd = "git add " . _twonote_note_path . ";"
 		let autoWriteCMD="! " . _twonote_gitadd . "git commit -m 'Updating " . _twonote_RFC3339_md . "'"
 		execute ":autocmd BufWritePost " . _twonote_note_path . " :execute \"" . autoWriteCMD . "\""
-		"execute ":autocmd BufWritePost " . _twonote_note_path . " :execute 'redraw!'"
+		"execute "autocmd BufWritePost " . _twonote_note_path . " :execute 'redraw!'"
+		execute "autocmd BufUnload " . g:_twonote_path . "* call TwoNotePost()"
 endfunction
 
 function! TwoNotePre()
 	echo 'pulling notes... '
 	execute ":silent ! cd " . g:_twonote_path
-	let g:_twonote_message = system("git pull")
+	let g:_twonote_message = system("cd " . g:_twonote_path . "; git pull")
 	execute ":redraw!"
 	echo g:_twonote_message
 endfunction
 
 function! TwoNotePost()
 	echo 'pushing notes... '
-	execute ":silent ! cd " . g:_twonote_path
-	execute ":silent ! git push"
+	execute ":silent ! cd " . g:_twonote_path . "; git push"
 	execute ":redraw!"
 endfunction
