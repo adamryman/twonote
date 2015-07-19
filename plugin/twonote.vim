@@ -6,7 +6,7 @@ source $HOME/.vim/bundle/twonote-vim/plugin/config.vim
 
 " Start plugin
 autocmd BufReadPost $HOME/.vim/bundle/twonote-vim/notes/* :TwoNoteHook
-"autocmd BufReadPre $HOME/.vim/bundle/twonote-vim/notes/*
+autocmd BufReadPre $HOME/.vim/bundle/twonote-vim/notes/* :call TwoNotePre()
 
 
 command! TwoNote call TwoNote()
@@ -61,5 +61,9 @@ function! TwoNoteHook()
 endfunction
 
 function! TwoNotePre()
-
+	echo 'pulling notes... '
+	execute ":silent ! cd " . g:_twonote_path
+	let g:_twonote_message = system("git pull")
+	execute ":redraw!"
+	echo g:_twonote_message
 endfunction
