@@ -1,10 +1,8 @@
-##Currently not working
-
-Something is wrong when I install the plugin, I have been working on this for a few hours but I need to sleep, hopefully v0.1 will be done soon.
-
 #twonote
 
 Version controlled markdown notes plugin for vim.
+
+Will not be full functional until v0.1.0. Currently fleshing things out and everything is subject to change.
 
 ###Overview
 
@@ -43,8 +41,6 @@ Open file in $HOME/.vim/bundle/twonote/notes and when saved it all be added and 
 - Delete notes that are empty
 	- Also if a user creates a note and closes without writing it, that should not be in history
 - Create an autocmd to auto write the file every 10 seconds, this will be configurable
-- Create a way to push the note repo from twonote
-- Create a way to pull notes from repo from twonote
 - Create a way to view notes in reverse chronological order from twonote
 - Create a way to grep/ack notes in reverse chronological order from twonote
 - Create gui with note pane / search on left + editing pane on right
