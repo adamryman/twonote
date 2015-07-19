@@ -5,8 +5,16 @@ map <leader><leader>k :call TwoNoteInit()<enter>
 source $HOME/.vim/bundle/twonote-vim/plugin/config.vim
 
 " Start plugin
-autocmd BufReadPost $HOME/.vim/bundle/twonote-vim/notes/* :TwoNoteHook
-autocmd BufReadPre $HOME/.vim/bundle/twonote-vim/notes/* :call TwoNotePre()
+"autocmd BufReadPost $HOME/.vim/bundle/twonote-vim/notes/* :TwoNoteHook
+augroup _twonote_init
+autocmd!
+execute "autocmd BufReadPost " . g:_twonote_path . "* :TwoNoteHook"
+execute "autocmd BufReadPost " . g:_twonote_path . "* call TwoNotePre()"
+execute "autocmd BufDelete " . g:_twonote_path . "* call TwoNotePost()"
+execute "autocmd BufUnload " . g:_twonote_path . "* call TwoNotePost()"
+"autocmd BufReadPre  g:_twonote_path . '*' call TwoNotePre()
+"autocmd BufWritePost g:_twonote_path . '*' call TwoNotePost()
+augroup END
 
 
 command! TwoNote call TwoNote()
@@ -55,9 +63,9 @@ function! TwoNoteHook()
 		let _twonote_note_path=expand('%:p')
 		let _twonote_RFC3339_md=expand('%:t')
 		let _twonote_gitadd = "git add " . _twonote_note_path . ";"
-		let autoWriteCMD="silent ! " . _twonote_gitadd . "git commit -m 'Updating " . _twonote_RFC3339_md . "'"
+		let autoWriteCMD="! " . _twonote_gitadd . "git commit -m 'Updating " . _twonote_RFC3339_md . "'"
 		execute ":autocmd BufWritePost " . _twonote_note_path . " :execute \"" . autoWriteCMD . "\""
-		execute ":autocmd BufWritePost " . _twonote_note_path . " :execute 'redraw!'"
+		"execute ":autocmd BufWritePost " . _twonote_note_path . " :execute 'redraw!'"
 endfunction
 
 function! TwoNotePre()
@@ -66,4 +74,11 @@ function! TwoNotePre()
 	let g:_twonote_message = system("git pull")
 	execute ":redraw!"
 	echo g:_twonote_message
+endfunction
+
+function! TwoNotePost()
+	echo 'pushing notes... '
+	execute ":silent ! cd " . g:_twonote_path
+	execute ":silent ! git push"
+	execute ":redraw!"
 endfunction
