@@ -46,11 +46,13 @@ function! TwoNoteInit()
 		"So I just set it directly
 
 		execute ":silent !mkdir -p " . g:_twonote_path
-		execute ":silent !cd " . g:_twonote_path
-		execute ":silent !git init"
-		execute ":silent !git remote set-url origin ". _notes_remotes
-		execute ":silent !git pull"
-		execute ":redraw!"
+		execute "lcd " . g:_twonote_path
+		execute ":!git init"
+		execute ":!git remote add origin ". g:_notes_remotes
+		execute ":!git remote set-url origin ". g:_notes_remotes
+		execute ":!git pull -u origin master"
+		execute ":!git branch --set-upstream-to=origin/master master"
+		"execute ":redraw!"
 endfunction
 
 function! TwoNoteUtil()
