@@ -13,7 +13,7 @@ twonote is a vim plugin that manages a git repo to version control your notes au
 If you are using [Vundle](https://github.com/VundleVim/Vundle.vim) then you should add this to where you add your plugsins in your `.vimrc`
 
 ```
-Plugin 'adamryman/twonote'
+Plugin 'adamryman/twonote-vim'
 ```
 
 ###Configure
