@@ -41,10 +41,10 @@ endfunction
 function! TwoNoteInit()
 	execute ":silent !mkdir -p " . g:_twonote_path
 	execute "lcd " . g:_twonote_path
-	execute ":!git init"
-	execute ":!git remote add origin ". g:_notes_remotes
-	execute ":!git remote set-url origin ". g:_notes_remotes
-	execute ":!git pull -u origin master"
+	execute ":silent !git init"
+	execute ":silent !git remote add origin ". g:_notes_remotes
+	execute ":silent !git remote set-url origin ". g:_notes_remotes
+	execute ":silent silent !git pull -u origin master"
 	execute ":!git branch --set-upstream-to=origin/master master"
 	execute ":redraw!"
 endfunction
@@ -53,14 +53,13 @@ function! TwoNoteUtil()
 endfunction
 
 function! TwoNoteHook()
-	echom "DEBUGL TwoNoteHook()"
 	let _twonote_note_path=expand('%:p')
 	let _twonote_RFC3339_md=expand('%:t')
 	lcd %:p:h
 	let _twonote_gitadd = "git add " . _twonote_note_path . ";"
-	let autoWriteCMD="! " . _twonote_gitadd . "git commit -m 'Updating " . _twonote_RFC3339_md . "'"
+	let autoWriteCMD="silent ! " . _twonote_gitadd . "git commit -m 'Updating " . _twonote_RFC3339_md . "'"
 	execute ":autocmd BufWritePost " . _twonote_note_path . " :execute \"" . autoWriteCMD . "\""
-	"execute "autocmd BufWritePost " . _twonote_note_path . " :execute 'redraw!'"
+	execute "autocmd BufWritePost " . _twonote_note_path . " :execute 'redraw!'"
 	execute "autocmd BufUnload " . g:_twonote_path . "* call TwoNotePost()"
 endfunction
 
