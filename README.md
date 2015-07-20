@@ -2,7 +2,7 @@
 
 Version controlled markdown notes plugin for vim.
 
-Will not be full functional until v0.1.0. Currently fleshing things out and everything is subject to change.
+Will not be fully functional until v0.1.0. Currently fleshing things out and everything is subject to change.
 
 ###Overview
 
