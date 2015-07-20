@@ -16,25 +16,31 @@ If you are using [Vundle](https://github.com/VundleVim/Vundle.vim) then you shou
 Plugin 'adamryman/twonote'
 ```
 
+###Configure
+
+After `:PluginInstall' with vundle you should have a file `$HOME\.vim\bundle\twonote-vim\plugin\config.vim`
+
+Edit this file and configure where you want your notes directory to be and set your remote git repo.
+
+Without a remote git repo, pushing and pulling will not work and may cause errors.
+
+For private notes your own repo or a private github repo works best.
+
 ###Usage
+
+Call this only once to initialize a git repo in configured location (DEFAULT: $HOME/.vim/bundle/twonote/notes)
 
 ```
 :TwoNoteInit
 ```
 
-Call this only once to initialize a git repo in $HOME/.vim/bundle/twonote/notes
+Used to start writing a new note
 
 ```
 :TwoNote
 ```
 
-Used to start writing a new note
-
-```
-:e $HOME/.vim/bundle/twonote/notes/*
-```
-
-Open file in $HOME/.vim/bundle/twonote/notes and when saved it all be added and commited
+Open file in _twonote_path and when saved it all will be added and commited
 
 ###TODO
 - IMPORTANT: Not allow user to call `:TwoNote` before `:TwoNoteInstall`

@@ -11,10 +11,15 @@ execute "autocmd BufReadPost " . g:_twonote_path . "* :TwoNoteHook"
 execute "autocmd BufReadPre " . g:_twonote_path . "* call TwoNotePre()"
 augroup END
 
+" Creating commands for commands to be used externally
 command! TwoNote call TwoNote()
-command! TwoNoteHook call TwoNoteHook()
 command! TwoNoteInit call TwoNoteInit()
 
+" Call to create a new note.
+" TwoNoteInit must have been called prior to calling
+" Creates a new note in the YYYY/MM/DD/ folder with name RFC3222.md
+" Adds this note to the note repo and commits it
+" Then it opens this note in a new buffer
 function! TwoNote()
 	let _twonote_datepath=strftime("%Y/%m/%d/")
 	let _twonote_RFC3339=strftime("%FT%T%z")
@@ -30,6 +35,7 @@ function! TwoNote()
 	    execute ":redraw!"
 		execute ":e " . _twonote_note_path
 endfunction
+
 
 function! TwoNoteInit()
 	execute ":silent !mkdir -p " . g:_twonote_path
