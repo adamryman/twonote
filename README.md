@@ -18,7 +18,7 @@ Plugin 'adamryman/twonote'
 
 ###Configure
 
-After `:PluginInstall' with vundle you should have a file `$HOME\.vim\bundle\twonote-vim\plugin\config.vim`
+After `:PluginInstall` with vundle you should have a file `$HOME\.vim\bundle\twonote-vim\plugin\config.vim`
 
 Edit this file and configure where you want your notes directory to be and set your remote git repo.
 
