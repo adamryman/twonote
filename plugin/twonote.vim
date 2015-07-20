@@ -32,9 +32,11 @@ function! TwoNote()
 
 
 	let _twonote_gitadd = "git add " . _twonote_note_path . ";"
-	execute ":silent !cd " . g:_twonote_path . ";" . _twonote_gitadd . "git commit -m \"" . _twonote_RFC3339 . ".md created at " . strftime("%s") . "\""
-	    execute ":redraw!"
-		execute ":e " . _twonote_note_path
+
+	let _twonote_utc = strftime("%s")
+	execute ":silent !cd " . g:_twonote_path . ";" . _twonote_gitadd . "git commit -m \"" . _twonote_RFC3339 . ".md created at " . _twonote_utc . "\""
+	execute ":redraw!"
+	execute ":e " . _twonote_note_path
 endfunction
 
 
