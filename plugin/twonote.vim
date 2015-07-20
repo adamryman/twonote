@@ -14,6 +14,7 @@ augroup END
 " Creating commands for commands to be used externally
 command! TwoNote call TwoNote()
 command! TwoNoteInit call TwoNoteInit()
+command! TwoNoteHook call TwoNoteHook()
 
 " Call to create a new note.
 " TwoNoteInit must have been called prior to calling
