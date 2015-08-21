@@ -1,6 +1,6 @@
 " Stuff for early dev
-map <leader><leader>j :TwoNote<enter>
-map <leader><leader>k :call TwoNoteInit()<enter>
+"map <leader><leader>j :TwoNote<enter>
+"map <leader><leader>k :call TwoNoteInit()<enter>
 
 source $HOME/.vim/bundle/twonote-vim/plugin/config.vim
 
